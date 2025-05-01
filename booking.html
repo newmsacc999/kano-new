@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complete Your Booking</title>
+    <style>
+      :root {
+        --primary: #2c3e50;
+        --secondary: #e74c3c;
+        --accent: #3498db;
+        --light: #ecf0f1;
+        --dark: #2c3e50;
+        --success: #27ae60;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        padding: 15px 20px;
+        border-bottom: 1px solid #e0e0e0;
+        background-color: white;
+        display: flex;
+        align-items: center;
+      }
+
+      .back-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+      }
+
+      .back-link svg {
+        margin-right: 8px;
+        width: 18px;
+        height: 18px;
+      }
+
+      .page-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-left: 20px;
+      }
+
+      .booking-container {
+        background-color: white;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 20px 0;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .section-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: var(--primary);
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+      }
+
+      .booking-details {
+        margin-bottom: 25px;
+      }
+
+      .booking-row {
+        margin-bottom: 12px;
+        display: flex;
+      }
+
+      .booking-label {
+        font-weight: bold;
+        width: 120px;
+        color: #555;
+      }
+
+      .booking-value {
+        flex: 1;
+      }
+
+      .price-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+      }
+
+      .total-row {
+        font-weight: bold;
+        border-top: 1px solid #eee;
+        padding-top: 12px;
+        margin-top: 15px;
+        font-size: 18px;
+      }
+
+      .customer-form {
+        margin-top: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
+
+      .error-message {
+        color: var(--secondary);
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .action-btns {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.2s;
+        font-size: 16px;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .btn-primary {
+        background-color: var(--secondary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: #c0392b;
+      }
+
+      .terms {
+        font-size: 14px;
+        color: #666;
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      /* Loading and success states */
+      .hidden {
+        display: none;
+      }
+      .success-message {
+        color: var(--success);
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+        margin-left: 10px;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <a href="tickets.html" class="back-link">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+        Back
+      </a>
+      <h1 class="page-title">Complete Your Booking</h1>
+    </header>
+
+    <div class="container">
+      <div class="booking-container" id="booking-form">
+        <!-- Hidden fields for Google Script -->
+        <input type="hidden" id="form-match" name="match" />
+        <input type="hidden" id="form-date" name="date" />
+        <input type="hidden" id="form-venue" name="venue" />
+        <input type="hidden" id="form-ticket-type" name="ticket_type" />
+        <input type="hidden" id="form-quantity" name="quantity" />
+        <input type="hidden" id="form-amount" name="amount" />
+
+        <h2 class="section-title">Booking Summary</h2>
+
+        <div class="booking-details">
+          <div class="booking-row">
+            <div class="booking-label">Match:</div>
+            <div class="booking-value" id="match-name">
+              Chennai Super Kings vs Royal Challengers Bengaluru
+            </div>
+          </div>
+          <div class="booking-row">
+            <div class="booking-label">Date & Time:</div>
+            <div class="booking-value" id="match-date">
+              28 March 2025, 7:30 PM IST
+            </div>
+          </div>
+          <div class="booking-row">
+            <div class="booking-label">Venue:</div>
+            <div class="booking-value" id="match-venue">
+              MA Chidambaram Stadium, Chennai
+            </div>
+          </div>
+          <div class="booking-row">
+            <div class="booking-label">Ticket Type:</div>
+            <div class="booking-value" id="ticket-type">General Stand</div>
+          </div>
+          <div class="booking-row">
+            <div class="booking-label">Quantity:</div>
+            <div class="booking-value" id="ticket-quantity">1 tickets</div>
+          </div>
+        </div>
+
+        <div class="price-section">
+          <div class="price-row">
+            <span>Base Amount:</span>
+            <span id="base-amount">₹0</span>
+          </div>
+          <div class="price-row">
+            <span>Service Fee:</span>
+            <span id="service-fee">₹39</span>
+          </div>
+          <div class="price-row">
+            <span>GST (12%):</span>
+            <span id="gst-amount">₹0</span>
+          </div>
+          <div class="price-row total-row">
+            <span>Total Amount:</span>
+            <span id="total-amount">₹0</span>
+          </div>
+        </div>
+
+        <div class="customer-form">
+          <h2 class="section-title">Customer Information</h2>
+
+          <div class="form-group">
+            <label for="full-name" class="form-label">Full Name *</label>
+            <input
+              type="text"
+              id="full-name"
+              name="full_name"
+              class="form-control"
+              required
+            />
+            <div class="error-message" id="name-error">
+              Please enter your full name
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              required
+            />
+            <div class="error-message" id="email-error">
+              Please enter a valid email address
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone Number *</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="form-control"
+              placeholder="Enter a 10-digit mobile number"
+              required
+            />
+            <div class="error-message" id="phone-error">
+              Please enter a valid 10-digit phone number
+            </div>
+          </div>
+        </div>
+
+        <div class="action-btns">
+          <button type="button" class="btn btn-primary" id="proceed-btn">
+            Proceed to Pay ₹0
+            <span class="spinner" id="spinner"></span>
+          </button>
+          <p class="terms">
+            By proceeding, you agree to our Terms & Conditions
+          </p>
+        </div>
+
+        <!-- Success Message -->
+        <div id="success-message" class="success-message hidden">
+          ✔ Redirecting to payment...
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('dblclick', function(event) {
+  event.preventDefault();
+}, { passive: false });
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Get booking details from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const matchId = urlParams.get('matchId');
+            const ticketType = urlParams.get('ticketType');
+            const quantity = parseInt(urlParams.get('quantity')) || 1;
+            const baseAmount = parseFloat(urlParams.get('baseAmount'));
+            
+            if (!matchId || !ticketType || isNaN(baseAmount)) {
+                alert('Invalid booking details');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Fetch match data
+            let matchData;
+            try {
+                const response = await fetch('matches.json');
+                if (!response.ok) throw new Error('Failed to fetch matches');
+                const matches = await response.json();
+                matchData = matches.find(m => m.id === matchId);
+                
+                if (!matchData) {
+                    throw new Error('Match not found');
+                }
+            } catch (error) {
+                console.error('Error loading match data:', error);
+                alert('Error loading match data. Please try again.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Calculate prices
+            const serviceFee = 39;
+            const gstAmount = (baseAmount + serviceFee) * 0.12;
+            const totalAmount = baseAmount + serviceFee + gstAmount;
+
+            // Update booking details
+            document.getElementById('match-name').textContent = `${matchData.team1.name} vs ${matchData.team2.name}`;
+            
+            const date = new Date(`${matchData.date}T${matchData.time}:00`);
+            const dateStr = date.toLocaleString('en-IN', {
+                weekday: 'short',
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('match-date').textContent = dateStr;
+            
+            document.getElementById('match-venue').textContent = matchData.venue;
+            document.getElementById('ticket-type').textContent = ticketType.charAt(0).toUpperCase() + ticketType.slice(1) + ' Stand';
+            document.getElementById('ticket-quantity').textContent = `${quantity} ticket${quantity > 1 ? 's' : ''}`;
+            
+            // Update prices
+            document.getElementById('base-amount').textContent = `₹${baseAmount.toFixed(2)}`;
+            document.getElementById('service-fee').textContent = `₹${serviceFee.toFixed(2)}`;
+            document.getElementById('gst-amount').textContent = `₹${gstAmount.toFixed(2)}`;
+            document.getElementById('total-amount').textContent = `₹${totalAmount.toFixed(2)}`;
+            document.getElementById('proceed-btn').textContent = `Proceed to Pay ₹${totalAmount.toFixed(2)}`;
+
+            // Form validation
+            const proceedBtn = document.getElementById('proceed-btn');
+            const fullName = document.getElementById('full-name');
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phone');
+            
+            function validateForm() {
+                let isValid = true;
+                
+                // Validate name
+                if (!fullName.value.trim()) {
+                    document.getElementById('name-error').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('name-error').style.display = 'none';
+                }
+                
+                // Validate email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value)) {
+                    document.getElementById('email-error').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('email-error').style.display = 'none';
+                }
+                
+                // Validate phone
+                const phoneRegex = /^\d{10}$/;
+                if (!phoneRegex.test(phone.value)) {
+                    document.getElementById('phone-error').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('phone-error').style.display = 'none';
+                }
+                
+                return isValid;
+            }
+            
+            // Proceed to payment
+            // In booking.html, update the proceedBtn click handler to:
+proceedBtn.addEventListener('click', function() {
+    if (validateForm()) {
+        // Redirect to payment page with total amount
+        window.location.href = `pay.html?amount=${totalAmount.toFixed(2)}`;
+    }
+});
+            
+            // Validate fields on blur
+            fullName.addEventListener('blur', validateForm);
+            email.addEventListener('blur', validateForm);
+            phone.addEventListener('blur', validateForm);
+        });
+    </script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"933c6981fb60417d","version":"2025.4.0-1-g37f21b1","r":1,"token":"35b426f0f1454a17842eb74e1334ac92","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+</body>
+</html>

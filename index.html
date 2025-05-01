@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book IPL 2025 Tickets</title>
+    <meta
+      name="description"
+      content="Book tickets for Indian Premier League 2025 matches"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        max-width: 430px;
+        margin: 0 auto;
+        background-color: #fff;
+      }
+      header {
+        border-bottom: 1px solid #e5e7eb;
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
+        padding: 8px 16px;
+      }
+      .logo {
+        height: 50px;
+      }
+      .banner {
+        width: 100%;
+        height: auto;
+      }
+      .section {
+        padding: 16px;
+      }
+      .bg-gray-50 {
+        background-color: #f9fafb;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .match-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 12px;
+      }
+      .match-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+      .teams {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 12px 0;
+      }
+      .team {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 30%;
+      }
+      .team-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+      .vs {
+        font-weight: bold;
+        color: #dc2626;
+      }
+      .venue {
+        text-align: center;
+        color: #6b7280;
+        font-size: 12px;
+        margin: 8px 0;
+      }
+      .book-btn {
+        width: 100%;
+        background-color: #dc2626;
+        color: white;
+        border: none;
+        padding: 8px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .completed {
+        background-color: #f3f4f6;
+      }
+      .completed-btn {
+        background-color: #9ca3af;
+        cursor: not-allowed;
+      }
+      .match-result {
+        text-align: center;
+        color: #dc2626;
+        font-size: 12px;
+        margin: 8px 0;
+        font-weight: bold;
+      }
+      .admin-link {
+        display: block;
+        text-align: center;
+        margin: 16px;
+        color: #3b82f6;
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      #completed-heading {
+        font-weight: bold;
+        margin: 24px 0 16px 0;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <div style="display: flex; align-items: center; gap: 8px">
+          <img
+            alt="BookMyShow"
+            class="logo"
+            src="images/bookmyshow-logo-vector.png"
+          />
+        </div>
+        <button
+          style="
+            padding: 8px;
+            border-radius: 6px;
+            background: none;
+            border: none;
+          "
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <img
+          alt="IPL 2025 Banner"
+          class="banner"
+          src="/images/banner-mobile.png"
+        />
+      </section>
+
+      <section class="section bg-gray-50">
+        <div class="text-center">
+          <h2 style="font-weight: bold; margin-bottom: 8px">
+            INDIA - Indian Premier League 2025
+          </h2>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 4px;
+            "
+          >
+            
+           
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="text-center" style="font-weight: bold; margin-bottom: 16px">
+          Upcoming Matches
+        </h2>
+        <div style="margin-bottom: 8px">
+          <p style="font-size: 12px; margin-bottom: 8px">
+            Book tickets for upcoming matches through the match list below
+          </p>
+          <p
+            style="
+              color: #ef4444;
+              font-size: 14px;
+              text-align: right;
+              cursor: pointer;
+              text-decoration: underline;
+            "
+          >
+            View All Matches
+          </p>
+        </div>
+
+        <div id="upcoming-matches">
+          <!-- Upcoming matches will be loaded here -->
+        </div>
+
+        <h3 id="completed-heading" style="display: none">Completed Matches</h3>
+        <div id="completed-matches">
+          <!-- Completed matches will be loaded here -->
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="footer"
+      style="background-color: #0a1633; color: white; padding: 32px 16px"
+    >
+      <div
+        class="sponsor-grid"
+        style="
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+          margin-bottom: 32px;
+          padding-bottom: 24px;
+          border-bottom: 1px solid #374151;
+        "
+      >
+        <div class="text-center">
+          <p
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              margin-bottom: 8px;
+              color: #9ca3af;
+            "
+          >
+            Official Broadcaster
+          </p>
+          <img
+            alt="Star Sports"
+            class="sponsor-img"
+            src="/images/new-sponsor-start-sports-logo.webp"
+            style="max-width: 60px; height: auto; margin: 0 auto"
+          />
+        </div>
+        <div class="text-center">
+          <p
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              margin-bottom: 8px;
+              color: #9ca3af;
+            "
+          >
+            Title Sponsor
+          </p>
+          <img
+            alt="TATA"
+            class="sponsor-img"
+            src="/images/new-sponsor-tata-logo.webp"
+            style="max-width: 60px; height: auto; margin: 0 auto"
+          />
+        </div>
+        <div class="text-center">
+          <p
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              margin-bottom: 8px;
+              color: #9ca3af;
+            "
+          >
+            Official Digital Streaming Partner
+          </p>
+          <img
+            alt="JioHotstar"
+            class="sponsor-img"
+            src="/images/JioHotstar.webp"
+            style="max-width: 60px; height: auto; margin: 0 auto"
+          />
+        </div>
+      </div>
+
+      <div
+        style="
+          margin-bottom: 32px;
+          padding-bottom: 24px;
+          border-bottom: 1px solid #374151;
+        "
+      >
+        <p
+          style="
+            font-size: 10px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            text-align: center;
+            color: #9ca3af;
+          "
+        >
+          Associate Partner
+        </p>
+        <div
+          class="sponsor-grid"
+          style="
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            align-items: center;
+            justify-items: center;
+          "
+        >
+          <img
+            alt="My11Circle"
+            style="max-width: 80px"
+            src="/images/new-sponsor-my11circle-logo.webp"
+          />
+          <img
+            alt="AngelOne"
+            style="max-width: 80px"
+            src="/images/new-sponsor-angelone-logo.webp"
+          />
+          <img
+            alt="RuPay"
+            style="max-width: 80px"
+            src="/images/new-sponsor-rupay-logo.webp"
+          />
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px">
+        <div class="text-center">
+          <p
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              margin-bottom: 8px;
+              color: #9ca3af;
+            "
+          >
+            Official Umpire Partner
+          </p>
+          <img
+            alt="Wonder Cement"
+            style="max-width: 70px; margin: 0 auto"
+            src="/images/new-partner-wonder-cement.webp"
+          />
+        </div>
+        <div class="text-center">
+          <p
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              margin-bottom: 8px;
+              color: #9ca3af;
+            "
+          >
+            Official Strategic Timeout Partner
+          </p>
+          <img
+            alt="CEAT"
+            style="max-width: 70px; margin: 0 auto"
+            src="/images/new-sponsor-ceat-logo.webp"
+          />
+        </div>
+      </div>
+    </footer>
+
+    <script>// Anti-copy protection
+    document.addEventListener('dblclick', function(event) {
+  event.preventDefault();
+}, { passive: false });
+      document.addEventListener("contextmenu", (e) => e.preventDefault());
+      document.addEventListener("selectstart", (e) => e.preventDefault());
+      document.onkeydown = (e) => {
+          if (e.ctrlKey && ["c", "u", "v", "s"].includes(e.key)) {
+              alert("Copy-paste band hai boss!");
+              return false;
+          }
+      };
+      
+      // Secure data loading (Fetch only future matches)
+      async function loadMatches() {
+          try {
+              const response = await fetch("matches.json");
+              if (!response.ok) throw new Error("Server error");
+              const matches = await response.json();
+      
+              // Save fresh data in local storage
+              localStorage.setItem("ipl2025_matches", JSON.stringify(matches));
+      
+              // **Remove past matches**
+              const now = new Date(); // Current time
+              return matches.filter(match => {
+                  const matchDate = new Date(`${match.date}T${match.time}:00`);
+                  return matchDate >= now; // Only future matches
+              });
+      
+          } catch (error) {
+              console.error("Failed to fetch matches:", error);
+      
+              // Fallback to localStorage
+              const localData = localStorage.getItem("ipl2025_matches");
+              if (localData) {
+                  const matches = JSON.parse(localData);
+                  const now = new Date();
+                  return matches.filter(match => {
+                      const matchDate = new Date(`${match.date}T${match.time}:00`);
+                      return matchDate >= now;
+                  });
+              }
+      
+              // Final fallback (empty matches)
+              console.warn("Using empty fallback");
+              return [];
+          }
+      }
+      
+      // Display matches on the page
+      function displayMatches(matches, showAll = false) {
+          const upcomingContainer = document.getElementById("upcoming-matches");
+          const completedContainer = document.getElementById("completed-matches");
+          const completedHeading = document.getElementById("completed-heading");
+      
+          upcomingContainer.innerHTML = "";
+          completedContainer.innerHTML = "";
+      
+          const upcoming = matches.filter((m) => m.status === "upcoming");
+          const completed = matches.filter((m) => m.status === "completed");
+      
+          if (completed.length) {
+              completedHeading.style.display = "block";
+          } else {
+              completedHeading.style.display = "none";
+          }
+      
+          // Show only the first 5 matches initially
+          const matchesToShow = showAll ? upcoming : upcoming.slice(0, 5);
+      
+          matchesToShow.forEach((match) => {
+              upcomingContainer.appendChild(createMatchElement(match));
+          });
+      
+          completed.forEach((match) => {
+              completedContainer.appendChild(createMatchElement(match));
+          });
+      
+          // Add "View All Matches" button if not already visible
+          if (!showAll && upcoming.length > 5) {
+              const viewAllBtn = document.createElement("p");
+              viewAllBtn.innerHTML = "View All Matches";
+              viewAllBtn.style.cssText = "color: #ef4444; font-size: 14px; text-align: right; cursor: pointer; text-decoration: underline;";
+              viewAllBtn.id = "view-all-btn";
+              viewAllBtn.addEventListener("click", function () {
+                  displayMatches(matches, true);
+                  viewAllBtn.remove(); // Remove the button after clicking
+              });
+              upcomingContainer.appendChild(viewAllBtn);
+          }
+      }
+      
+      // Create match elements dynamically
+      function createMatchElement(match) {
+          const element = document.createElement("div");
+          element.className = `match-card ${match.status === "completed" ? "completed" : ""}`;
+      
+          const date = new Date(`${match.date}T${match.time}:00`);
+          const dateStr = date.toLocaleString("en-IN", {
+              weekday: "short",
+              day: "numeric",
+              month: "short",
+              hour: "2-digit",
+              minute: "2-digit",
+          });
+      
+          element.innerHTML = `
+              <div class="match-header">
+                  <div style="font-weight: bold;">${match.name}</div>
+                  <div style="color: #6b7280; font-size: 12px;">${dateStr}</div>
+              </div>
+              <div class="teams">
+                  <div class="team">
+                      <img src="${match.team1.logo}" alt="${match.team1.name}" class="team-logo">
+                      <span>${match.team1.short}</span>
+                  </div>
+                  <div class="vs">${match.status === "completed" ? "vs" : "VS"}</div>
+                  <div class="team">
+                      <img src="${match.team2.logo}" alt="${match.team2.name}" class="team-logo">
+                      <span>${match.team2.short}</span>
+                  </div>
+              </div>
+              <div class="venue">${match.venue}</div>
+              ${match.status === "completed" ? `<div class="match-result">${match.score || "Match Completed"}<br>${match.winner ? match.winner + " won" : ""}</div>` : ""}
+              <button class="book-btn ${match.status === "completed" ? "completed-btn" : ""}"
+                      ${match.status === "completed" ? "disabled" : ""}
+                      data-match-id="${match.id}">
+                  ${match.status === "completed" ? "Match Completed" : "Book Tickets"}
+              </button>
+          `;
+      
+          return element;
+      }
+      
+      // Initialize on page load
+      document.addEventListener("DOMContentLoaded", async () => {
+          const matches = await loadMatches();
+          displayMatches(matches);
+      
+          // Refresh button
+          document.querySelector('[style*="text-decoration: underline"]').addEventListener("click", async () => {
+              const matches = await loadMatches();
+              displayMatches(matches);
+          });
+      
+          // Booking button handler
+          document.addEventListener("click", function (e) {
+              if (e.target.classList.contains("book-btn") && !e.target.classList.contains("completed-btn")) {
+                  const matchId = e.target.getAttribute("data-match-id");
+                  window.location.href = `tickets.html?matchId=${matchId}`;
+              }
+          });
+      });
+      </script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"933c4ba80a306352","version":"2025.4.0-1-g37f21b1","r":1,"token":"35b426f0f1454a17842eb74e1334ac92","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+</body>
+</html>
